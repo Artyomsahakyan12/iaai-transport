@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IAAI Transport</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 24px 16px;
+    background: #f5f7fa;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #172033;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0 28px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    border: 1px solid #ccd2da;
+    border-radius: 12px;
+    outline: none;
+    background: white;
+}
+
+.label {
+    margin-top: 24px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#result {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 17px;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.price {
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>IAAI Transport</h1>
+
+<input
+    id="searchInput"
+    class="search-box"
+    type="text"
+    placeholder="Search location..."
+    autocomplete="off"
+>
+
+<div class="label">Result</div>
+
+<div id="result">
+    Search location...
+</div>
+
+</div>
+
+<script>
+
+const database = [
+    {name:"East Bay",price:1850},
+    {name:"East Coast",price:1950},
+    {name:"East Providence",price:2050},
+    {name:"Portland - Gorham",price:2020},
+    {name:"Rosedale",price:1790},
+    {name:"Rental Rides",price:2100},
+    {name:"Baltimore",price:1650},
+    {name:"Chicago South",price:2350},
+    {name:"Dallas",price:2250},
+    {name:"Houston",price:2250}
+];
+
+const input = document.getElementById("searchInput");
+const result = document.getElementById("result");
+
+input.addEventListener("input", function() {
+
+    const query = input.value.trim().toLowerCase();
+
+    if (!query) {
+        result.innerHTML = "Search location...";
+        return;
+    }
+
+    const found = database.filter(item =>
+        item.name.toLowerCase().startsWith(query)
+    );
+
+    if (!found.length) {
+        result.innerHTML = "No results found.";
+        return;
+    }
+
+    result.innerHTML = found.map(item => `
+        <div class="result-item">
+            <span>${item.name}</span>
+            <span class="price">$${item.price.toLocaleString()}</span>
+        </div>
+    `).join("");
+
+});
+
+</script>
+
+</body>
+</html>
