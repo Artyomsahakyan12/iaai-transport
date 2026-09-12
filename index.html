@@ -156,6 +156,15 @@ button{
     color:#8C0000
 }
 
+.georgia-indicator{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    color:#697386;
+    margin-bottom:3px;
+    white-space:nowrap
+}
+
 .auction-logo{
     width:34px;
     height:24px;
@@ -1605,6 +1614,10 @@ function escapeHTML(text){
         .replace(/'/g,"&#039;");
 }
 
+function isCanadianLocation(item){
+    return ["AB","NB","NS","ON","QC"].includes(item.state);
+}
+
 function doSearch(){
 
     const query = searchInput.value.trim().toLowerCase();
@@ -1653,6 +1666,7 @@ src="./${item.logo}"
             </div>
 
             <div class="price ${getPriceClass(item.price)}">
+                ${isCanadianLocation(item) ? '<span class="georgia-indicator">🇬🇪 To Georgia</span>' : ''}
                 ${escapeHTML(item.price)}
             </div>
 
