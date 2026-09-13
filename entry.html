@@ -37,24 +37,29 @@
             justify-content: center;
 
             width: 72%;
-            max-width: 360px;
-            min-width: 0;
-            height: 64px;
+            max-width: 540px;
+            min-width: 220px;
+            height: 115px;
 
-            border-radius: 22px;
-            background: #2864e8;
-            color: #ffffff;
+            border: 1px solid #d2dae7;
+            border-radius: 28px;
+            background: #ffffff;
+            color: #172033;
 
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 700;
             text-align: center;
             text-decoration: none;
+
+            box-shadow:
+                8px 8px 20px rgba(35, 55, 85, 0.14),
+                -6px -6px 16px rgba(255, 255, 255, 0.95);
 
             transition: background 0.15s ease;
         }
 
         .tool-button:hover {
-            background: #1d4ed8;
+            background: #f8faff;
         }
 
         .tool-button:active,
@@ -62,54 +67,36 @@
             outline: none;
         }
 
-        /* Ընդհանուր սպիտակ կոճակներ */
+        /* Ընդհանուր կառուցվածք Transportation և BidCars կոճակների համար */
         .brand-button {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            box-sizing: border-box;
 
             width: 72%;
-            max-width: 360px;
-            min-width: 0;
-            height: 64px;
+            max-width: 540px;
+            height: 115px;
 
-            padding: 6px 10px;
-            border: 1px solid rgba(190, 201, 218, 0.85);
-            border-radius: 22px;
+            padding: 10px 16px;
+            border: 1px solid #d2dae7;
+            border-radius: 28px;
 
             background: #ffffff;
             color: #172033;
             text-decoration: none;
 
             box-shadow:
-                0 2px 4px rgba(35, 55, 85, 0.08),
-                0 8px 18px rgba(35, 55, 85, 0.14),
-                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
-                -4px -4px 12px rgba(255, 255, 255, 0.95);
+                8px 8px 20px rgba(35, 55, 85, 0.14),
+                -6px -6px 16px rgba(255, 255, 255, 0.95);
 
             overflow: hidden;
-
-            transition:
-                box-shadow 0.15s ease,
-                transform 0.15s ease;
         }
 
-        .brand-button:hover {
-            box-shadow:
-                0 3px 5px rgba(35, 55, 85, 0.10),
-                0 10px 22px rgba(35, 55, 85, 0.18),
-                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
-                -4px -4px 12px rgba(255, 255, 255, 0.95);
-        }
-
-        .brand-button:active {
-            transform: scale(0.99);
-        }
-
-        /* Լոգոյի համար ֆիքսված տարածք՝ գծերը հավասարեցնելու համար */
-        .brand-logo-box {
-            width: 112px;
-            height: 52px;
+        /* Լոգոյի համար հաստատուն լայնություն,
+           որպեսզի երկու բաժանարար գծերը նույն դիրքում լինեն */
+        .brand-logo-area {
+            width: 220px;
+            height: 100%;
             flex-shrink: 0;
 
             display: flex;
@@ -117,27 +104,22 @@
             justify-content: center;
         }
 
-        .brand-logo {
-            max-width: 100%;
-            max-height: 100%;
+        .transport-logo {
+            width: 100px;
+            height: 100px;
             object-fit: contain;
         }
 
-        .caucasus-logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-        }
-
         .bidcars-logo {
-            width: 104px;
-            height: 48px;
+            width: 150px;
+            height: 95px;
+            object-fit: contain;
         }
 
         .brand-divider {
             width: 2px;
-            height: 42px;
-            margin: 0 12px;
+            height: 82px;
+            margin: 0 18px;
             flex-shrink: 0;
             background: #d9e0e9;
         }
@@ -152,9 +134,9 @@
             justify-content: center;
 
             text-align: center;
-            font-size: 15px;
+            font-size: 28px;
             font-weight: 700;
-            line-height: 1.15;
+            line-height: 1.2;
         }
 
         .brand-text span {
@@ -162,43 +144,61 @@
         }
 
         .brand-arrow {
-            width: 18px;
+            margin-left: 10px;
             flex-shrink: 0;
-
-            margin-left: 8px;
-            font-size: 30px;
+            font-size: 42px;
             color: #172033;
-            text-align: center;
         }
 
-        @media (max-width: 420px) {
+        @media (max-width: 520px) {
+            .buttons {
+                gap: 18px;
+                padding: 20px 0;
+            }
+
             .brand-button,
             .tool-button {
                 width: 72%;
+                min-width: 0;
             }
 
             .brand-button {
-                height: 64px;
-                padding: 6px 10px;
+                height: 115px;
+                padding: 10px;
             }
 
-            .brand-logo-box {
+            .brand-logo-area {
+                width: 125px;
+            }
+
+            .transport-logo {
+                width: 76px;
+                height: 76px;
+            }
+
+            .bidcars-logo {
                 width: 112px;
-                height: 52px;
+                height: 78px;
             }
 
             .brand-divider {
-                height: 42px;
+                height: 82px;
                 margin: 0 10px;
             }
 
             .brand-text {
-                font-size: 15px;
+                font-size: 23px;
             }
 
             .brand-arrow {
-                font-size: 30px;
+                font-size: 38px;
                 margin-left: 6px;
+            }
+
+            .tool-button {
+                height: 115px;
+                border-radius: 28px;
+                font-size: 28px;
             }
         }
     </style>
@@ -209,13 +209,11 @@
     <div class="buttons">
 
         <!-- Transportation Price -->
-        <a
-            class="brand-button"
-            href="transportationPrice.html"
-        >
-            <div class="brand-logo-box">
+        <a class="brand-button" href="transportationPrice.html">
+
+            <div class="brand-logo-area">
                 <img
-                    class="brand-logo caucasus-logo"
+                    class="transport-logo"
                     src="caucasus-logo.jpeg"
                     alt="Caucasus Auto Import"
                 >
@@ -229,6 +227,7 @@
             </div>
 
             <div class="brand-arrow">›</div>
+
         </a>
 
         <!-- BidCars -->
@@ -238,9 +237,10 @@
             target="_blank"
             rel="noopener noreferrer"
         >
-            <div class="brand-logo-box">
+
+            <div class="brand-logo-area">
                 <img
-                    class="brand-logo bidcars-logo"
+                    class="bidcars-logo"
                     src="bidcars-logo.jpeg"
                     alt="BidCars"
                 >
@@ -253,6 +253,7 @@
             </div>
 
             <div class="brand-arrow">›</div>
+
         </a>
 
         <!-- SeaRates -->
