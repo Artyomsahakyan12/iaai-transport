@@ -70,26 +70,27 @@
             box-sizing: border-box;
 
             width: 72%;
-            max-width: 540px;
-            height: 115px;
+            max-width: 360px;
+            min-width: 0;
+            height: 64px;
 
-            padding: 10px 16px;
-            border-radius: 28px;
+            padding: 6px 10px;
+            border-radius: 22px;
 
             background: #ffffff;
             color: #172033;
             text-decoration: none;
 
             box-shadow:
-                8px 8px 20px rgba(35, 55, 85, 0.10),
-                -6px -6px 16px rgba(255, 255, 255, 0.95);
+                6px 6px 16px rgba(35, 55, 85, 0.10),
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
 
             overflow: hidden;
         }
 
         .transport-logo {
-            width: 76px;
-            height: 76px;
+            width: 48px;
+            height: 48px;
             flex-shrink: 0;
             border-radius: 50%;
             object-fit: contain;
@@ -97,8 +98,8 @@
 
         .transport-divider {
             width: 2px;
-            height: 68px;
-            margin: 0 18px;
+            height: 42px;
+            margin: 0 12px;
             flex-shrink: 0;
             background: #d9e0e9;
         }
@@ -113,9 +114,9 @@
             justify-content: center;
 
             text-align: center;
-            font-size: 20px;
+            font-size: 15px;
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.15;
         }
 
         .transport-text span {
@@ -123,13 +124,13 @@
         }
 
         .transport-arrow {
-            margin-left: 10px;
+            margin-left: 8px;
             flex-shrink: 0;
-            font-size: 38px;
+            font-size: 30px;
             color: #172033;
         }
 
-        @media (max-width: 520px) {
+        @media (max-width: 420px) {
             .tool-button {
                 width: 72%;
                 min-width: 0;
@@ -137,26 +138,26 @@
 
             .transport-button {
                 width: 72%;
-                height: 115px;
-                padding: 10px;
+                height: 64px;
+                padding: 6px 10px;
             }
 
             .transport-logo {
-                width: 70px;
-                height: 70px;
+                width: 48px;
+                height: 48px;
             }
 
             .transport-divider {
-                height: 64px;
-                margin: 0 12px;
+                height: 42px;
+                margin: 0 10px;
             }
 
             .transport-text {
-                font-size: 17px;
+                font-size: 15px;
             }
 
             .transport-arrow {
-                font-size: 32px;
+                font-size: 30px;
                 margin-left: 6px;
             }
         }
