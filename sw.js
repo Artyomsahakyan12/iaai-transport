@@ -1,37 +1,45 @@
+const CACHE_NAME = "pulse-autoimport-v5";
+
 self.addEventListener("install", event => {
-    self.skipWaiting();
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
-    event.waitUntil(
-        caches.keys()
-            .then(cacheNames =>
-                Promise.all(
-                    cacheNames.map(cacheName => caches.delete(cacheName))
-                )
-            )
-            .then(() => self.clients.claim())
-    );
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      )
+    ).then(() => self.clients.claim())
+  );
 });
 
 self.addEventListener("fetch", event => {
-    const request = event.request;
-    const url = new URL(request.url);
+  const request = event.request;
 
-    // Մի միջամտել POST և այլ ոչ-GET հարցումներին
-    if (request.method !== "GET") {
-        return;
-    }
-
-    // Արտաքին կայքերը թողնել browser-ի սովորական cache-ի կառավարմանը
-    if (url.origin !== self.location.origin) {
-        return;
-    }
-
-    // Քո app-ի սեփական ֆայլերը միշտ վերցնել ցանցից
+  // HTML էջերը միշտ վերցնել ցանցից՝ հին էջ չցուցադրելու համար
+  if (request.mode === "navigate") {
     event.respondWith(
-        fetch(request, {
-            cache: "no-store"
-        })
+      fetch(request, { cache: "no-store" })
+        .catch(() => caches.match(request))
     );
+    return;
+  }
+
+  // Մնացած ֆայլերի համար սովորական network-first
+  event.respondWith(
+    fetch(request)
+      .then(response => {
+        const copy = response.clone();
+
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(request, copy);
+        });
+
+        return response;
+      })
+      .catch(() => caches.match(request))
+  );
 });
