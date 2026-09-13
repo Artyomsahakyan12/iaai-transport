@@ -4,24 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Transportation Price</title>
+    <title>Pulse AutoImport</title>
 
     <style>
         * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             margin: 0;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             background: #f5f6fa;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: Arial, sans-serif;
         }
 
-        a {
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .tool-button {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -31,30 +41,54 @@
             min-width: 220px;
             height: 64px;
 
-            background: #2864e8;
-            color: white;
-
             border-radius: 22px;
-            text-decoration: none;
+            background: #2864e8;
+            color: #ffffff;
 
             font-size: 18px;
             font-weight: 700;
             text-align: center;
+            text-decoration: none;
 
-            -webkit-tap-highlight-color: transparent;
+            transition: background 0.15s ease;
         }
 
-        a:active,
-        a:focus {
+        .tool-button:hover {
+            background: #1d4ed8;
+        }
+
+        .tool-button:active,
+        .tool-button:focus {
             outline: none;
-            transform: none;
+        }
+
+        @media (max-width: 420px) {
+            .tool-button {
+                width: 72%;
+                min-width: 0;
+            }
         }
     </style>
 </head>
 
 <body>
-    <a href="transportationPrice.html">
-        Transportation Price
-    </a>
+
+    <div class="buttons">
+
+        <a class="tool-button" href="transportationPrice.html">
+            Transportation Price
+        </a>
+
+        <a
+            class="tool-button"
+            href="https://bid.cars/en/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            BidCars
+        </a>
+
+    </div>
+
 </body>
 </html>
