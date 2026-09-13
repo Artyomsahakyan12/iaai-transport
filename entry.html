@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pulse AutoImport</title>
+
+    <!-- iOS Home Screen Web App -->
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
+
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="theme-color"
+        content="#172033"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="./pulseAutoImport-appIcon.PNG"
+    >
+
+    <link
+        rel="manifest"
+        href="./manifest.json"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f5f6fa;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Pulse AutoImport logo */
+        .brand-logo {
+            width: 260px;
+            max-width: 70%;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 55px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .tool-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 72%;
+            max-width: 360px;
+            min-width: 0;
+            height: 64px;
+            border-radius: 22px;
+            background: #2864e8;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+
+        .tool-button:hover {
+            background: #1d4ed8;
+        }
+
+        .tool-button:active,
+        .tool-button:focus {
+            outline: none;
+        }
+
+        /* Transportation Price button */
+        .transport-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+
+            width: 72%;
+            max-width: 360px;
+            min-width: 0;
+            height: 64px;
+
+            padding: 6px 10px;
+            border: 1px solid rgba(190, 201, 218, 0.75);
+            border-radius: 22px;
+
+            background: #ffffff;
+            color: #172033;
+            text-decoration: none;
+
+            box-shadow:
+                0 2px 4px rgba(35, 55, 85, 0.08),
+                0 8px 18px rgba(35, 55, 85, 0.14),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+
+            overflow: hidden;
+
+            transition:
+                box-shadow 0.15s ease,
+                transform 0.15s ease;
+        }
+
+        .transport-button:hover {
+            box-shadow:
+                0 3px 5px rgba(35, 55, 85, 0.10),
+                0 10px 22px rgba(35, 55, 85, 0.18),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+        }
+
+        .transport-button:active {
+            transform: scale(0.99);
+        }
+
+        .transport-logo {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            object-fit: contain;
+            transform: translateX(12px) scale(1.5);
+            transform-origin: center;
+        }
+
+        .transport-divider {
+            width: 2px;
+            height: 42px;
+            margin: 0 12px;
+            flex-shrink: 0;
+            background: #d9e0e9;
+        }
+
+        .transport-text {
+            flex: 1;
+            min-width: 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.15;
+
+            transform: translateX(12px);
+        }
+
+        .transport-text span {
+            display: block;
+        }
+
+        .transport-arrow {
+            margin-left: 8px;
+            flex-shrink: 0;
+            font-size: 30px;
+            color: #172033;
+        }
+
+        /* BidCars button */
+        .bidcars-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+
+            width: 72%;
+            max-width: 360px;
+            min-width: 0;
+            height: 64px;
+
+            padding: 6px 10px;
+            border: 1px solid rgba(190, 201, 218, 0.75);
+            border-radius: 22px;
+
+            background: #ffffff;
+            color: #172033;
+            text-decoration: none;
+
+            box-shadow:
+                0 2px 4px rgba(35, 55, 85, 0.08),
+                0 8px 18px rgba(35, 55, 85, 0.14),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+
+            overflow: hidden;
+
+            transition:
+                box-shadow 0.15s ease,
+                transform 0.15s ease;
+        }
+
+        .bidcars-button:hover {
+            box-shadow:
+                0 3px 5px rgba(35, 55, 85, 0.10),
+                0 10px 22px rgba(35, 55, 85, 0.18),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+        }
+
+        .bidcars-button:active {
+            transform: scale(0.99);
+        }
+
+        .bidcars-logo {
+            width: 78px;
+            height: 48px;
+            flex-shrink: 0;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .bidcars-divider {
+            width: 2px;
+            height: 42px;
+            margin: 0 12px;
+            flex-shrink: 0;
+            background: #d9e0e9;
+        }
+
+        .bidcars-text {
+            flex: 1;
+            min-width: 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .bidcars-arrow {
+            margin-left: 8px;
+            flex-shrink: 0;
+            font-size: 30px;
+            color: #172033;
+        }
+
+        /* SeaRates button */
+        .searates-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+
+            width: 72%;
+            max-width: 360px;
+            min-width: 0;
+            height: 64px;
+
+            padding: 6px 10px;
+            border: 1px solid rgba(190, 201, 218, 0.75);
+            border-radius: 22px;
+
+            background: #ffffff;
+            color: #172033;
+            text-decoration: none;
+
+            box-shadow:
+                0 2px 4px rgba(35, 55, 85, 0.08),
+                0 8px 18px rgba(35, 55, 85, 0.14),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+
+            overflow: hidden;
+
+            transition:
+                box-shadow 0.15s ease,
+                transform 0.15s ease;
+        }
+
+        .searates-button:hover {
+            box-shadow:
+                0 3px 5px rgba(35, 55, 85, 0.10),
+                0 10px 22px rgba(35, 55, 85, 0.18),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+        }
+
+        .searates-button:active {
+            transform: scale(0.99);
+        }
+
+        .searates-logo {
+            width: 78px;
+            height: 48px;
+            flex-shrink: 0;
+            object-fit: contain;
+            border-radius: 8px;
+            transform: scale(1.2);
+            transform-origin: center;
+        }
+
+        .searates-divider {
+            width: 2px;
+            height: 42px;
+            margin: 0 12px;
+            flex-shrink: 0;
+            background: #d9e0e9;
+        }
+
+        .searates-text {
+            flex: 1;
+            min-width: 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .searates-arrow {
+            margin-left: 8px;
+            flex-shrink: 0;
+            font-size: 30px;
+            color: #172033;
+        }
+
+        @media (max-width: 420px) {
+            .brand-logo {
+                width: 260px;
+                max-width: 70%;
+                margin-bottom: 55px;
+            }
+
+            .transport-button,
+            .bidcars-button,
+            .searates-button {
+                width: 72%;
+            }
+
+            .transport-button {
+                padding: 6px 10px;
+            }
+
+            .transport-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .transport-divider {
+                height: 42px;
+                margin: 0 10px;
+            }
+
+            .transport-text {
+                font-size: 15px;
+            }
+
+            .transport-arrow {
+                font-size: 30px;
+                margin-left: 6px;
+            }
+
+            .bidcars-logo {
+                width: 72px;
+                height: 46px;
+            }
+
+            .bidcars-divider {
+                margin: 0 9px;
+            }
+
+            .bidcars-text {
+                font-size: 17px;
+            }
+
+            .bidcars-arrow {
+                font-size: 30px;
+                margin-left: 6px;
+            }
+
+            .searates-logo {
+                width: 72px;
+                height: 46px;
+            }
+
+            .searates-divider {
+                margin: 0 9px;
+            }
+
+            .searates-text {
+                font-size: 17px;
+            }
+
+            .searates-arrow {
+                font-size: 30px;
+                margin-left: 6px;
+            }
+        }
+
+        /* Move Transportation Price divider to the right */
+        .transport-button .transport-divider {
+            transform: translateX(30px);
+        }
+
+        @media (max-width: 420px) {
+            .transport-button .transport-divider {
+                transform: translateX(24px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Pulse AutoImport logo -->
+    <img
+        class="brand-logo"
+        src="./pulseAutoImport-logo.PNG"
+        alt="Pulse AutoImport"
+    >
+
+    <div class="buttons">
+
+        <!-- Transportation Price -->
+        <a
+            class="transport-button"
+            href="./transportationPrice.html"
+            target="_self"
+        >
+            <img
+                class="transport-logo"
+                src="./caucasus-logo.jpeg"
+                alt="Caucasus Auto Import"
+            >
+
+            <div class="transport-divider"></div>
+
+            <div class="transport-text">
+                <span>Transportation</span>
+                <span>Price</span>
+            </div>
+
+            <div class="transport-arrow">›</div>
+        </a>
+
+        <!-- BidCars -->
+        <a
+            class="bidcars-button"
+            href="https://bid.cars/en/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <img
+                class="bidcars-logo"
+                src="./bidcars-logo.jpeg"
+                alt="BidCars"
+            >
+
+            <div class="bidcars-divider"></div>
+
+            <div class="bidcars-text">
+                BidCars
+            </div>
+
+            <div class="bidcars-arrow">›</div>
+        </a>
+
+        <!-- SeaRates -->
+        <a
+            class="searates-button"
+            href="https://www.searates.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <img
+                class="searates-logo"
+                src="./searates-logo.jpeg"
+                alt="SeaRates"
+            >
+
+            <div class="searates-divider"></div>
+
+            <div class="searates-text">
+                SeaRates
+            </div>
+
+            <div class="searates-arrow">›</div>
+        </a>
+
+    </div>
+
+</body>
+</html>
