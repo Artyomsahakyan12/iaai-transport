@@ -2,45 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-<title>PulseAutoImport</title>
-<meta name="apple-mobile-web-app-title" content="PulseAutoImport">
+    <title>PulseAutoImport</title>
+    <meta name="apple-mobile-web-app-title" content="PulseAutoImport">
 
     <!-- iOS Home Screen Web App -->
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#172033">
 
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="default"
-    >
-
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
-    >
-
-    <meta
-        name="theme-color"
-        content="#172033"
-    >
-
-    <link
-        rel="apple-touch-icon"
-        href="./pulseAutoImport-appIcon.PNG"
-    >
-
-    <link
-        rel="manifest"
-        href="./manifest.json"
-    >
+    <link rel="apple-touch-icon" href="./pulseAutoImport-appIcon.PNG">
+    <link rel="manifest" href="./manifest.json">
 
     <style>
         * {
@@ -49,8 +23,8 @@
         }
 
         body {
-            margin: 0;
             min-height: 100vh;
+            margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -59,64 +33,68 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Pulse AutoImport logo */
         .brand-logo {
             width: 260px;
             max-width: 70%;
             height: auto;
-            object-fit: contain;
             margin-bottom: 55px;
+            object-fit: contain;
         }
 
         .buttons {
+            width: 100%;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 18px;
-            width: 100%;
-            padding: 20px;
         }
 
         .tool-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             width: 72%;
             max-width: 360px;
             min-width: 0;
             height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 22px;
-            background: #2864e8;
-            color: #ffffff;
+            text-decoration: none;
+            text-align: center;
             font-size: 18px;
             font-weight: 700;
-            text-align: center;
-            text-decoration: none;
-            transition: background 0.15s ease;
+            transition:
+                background 0.15s ease,
+                box-shadow 0.15s ease,
+                transform 0.15s ease;
         }
 
         .tool-button:hover {
             background: #1d4ed8;
         }
 
-        .tool-button:active,
+        .tool-button:active {
+            transform: scale(0.99);
+        }
+
         .tool-button:focus {
             outline: none;
         }
 
-        /* Transportation Price button */
-        .transport-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-
+        .transport-button,
+        .bidcars-button,
+        .caucasusContainerTracking-button {
             width: 72%;
             max-width: 360px;
             min-width: 0;
             height: 64px;
-
             padding: 6px 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-sizing: border-box;
             border: 1px solid rgba(190, 201, 218, 0.75);
             border-radius: 22px;
 
@@ -137,7 +115,9 @@
                 transform 0.15s ease;
         }
 
-        .transport-button:hover {
+        .transport-button:hover,
+        .bidcars-button:hover,
+        .caucasusContainerTracking-button:hover {
             box-shadow:
                 0 3px 5px rgba(35, 55, 85, 0.10),
                 0 10px 22px rgba(35, 55, 85, 0.18),
@@ -145,11 +125,14 @@
                 -4px -4px 12px rgba(255, 255, 255, 0.95);
         }
 
-        .transport-button:active {
+        .transport-button:active,
+        .bidcars-button:active,
+        .caucasusContainerTracking-button:active {
             transform: scale(0.99);
         }
 
-        .transport-logo {
+        .transport-logo,
+        .caucasusContainerTracking-logo {
             width: 48px;
             height: 48px;
             flex-shrink: 0;
@@ -159,15 +142,26 @@
             transform-origin: center;
         }
 
-        .transport-divider {
+        .bidcars-logo {
+            width: 78px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .transport-divider,
+        .bidcars-divider,
+        .caucasusContainerTracking-divider {
             width: 2px;
             height: 42px;
-            margin: 0 12px;
             flex-shrink: 0;
+            margin: 0 12px;
             background: #d9e0e9;
         }
 
-        .transport-text {
+        .transport-text,
+        .caucasusContainerTracking-text {
             flex: 1;
             min-width: 0;
 
@@ -180,184 +174,36 @@
             font-size: 15px;
             font-weight: 700;
             line-height: 1.15;
-
             transform: translateX(12px);
         }
 
-        .transport-text span {
+        .transport-text span,
+        .caucasusContainerTracking-text span {
             display: block;
-        }
-
-        .transport-arrow {
-            margin-left: 8px;
-            flex-shrink: 0;
-            font-size: 30px;
-            color: #172033;
-        }
-
-        /* BidCars button */
-        .bidcars-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-
-            width: 72%;
-            max-width: 360px;
-            min-width: 0;
-            height: 64px;
-
-            padding: 6px 10px;
-            border: 1px solid rgba(190, 201, 218, 0.75);
-            border-radius: 22px;
-
-            background: #ffffff;
-            color: #172033;
-            text-decoration: none;
-
-            box-shadow:
-                0 2px 4px rgba(35, 55, 85, 0.08),
-                0 8px 18px rgba(35, 55, 85, 0.14),
-                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
-                -4px -4px 12px rgba(255, 255, 255, 0.95);
-
-            overflow: hidden;
-
-            transition:
-                box-shadow 0.15s ease,
-                transform 0.15s ease;
-        }
-
-        .bidcars-button:hover {
-            box-shadow:
-                0 3px 5px rgba(35, 55, 85, 0.10),
-                0 10px 22px rgba(35, 55, 85, 0.18),
-                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
-                -4px -4px 12px rgba(255, 255, 255, 0.95);
-        }
-
-        .bidcars-button:active {
-            transform: scale(0.99);
-        }
-
-        .bidcars-logo {
-            width: 78px;
-            height: 48px;
-            flex-shrink: 0;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        .bidcars-divider {
-            width: 2px;
-            height: 42px;
-            margin: 0 12px;
-            flex-shrink: 0;
-            background: #d9e0e9;
         }
 
         .bidcars-text {
             flex: 1;
             min-width: 0;
+            color: #172033;
             text-align: center;
             font-size: 18px;
             font-weight: 700;
-            color: #172033;
         }
 
-        .bidcars-arrow {
-            margin-left: 8px;
-            flex-shrink: 0;
-            font-size: 30px;
-            color: #172033;
-        }
-
-        /* Caucasus container-tracking button */
-        .caucasusContainerTracking-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-
-            width: 72%;
-            max-width: 360px;
-            min-width: 0;
-            height: 64px;
-
-            padding: 6px 10px;
-            border: 1px solid rgba(190, 201, 218, 0.75);
-            border-radius: 22px;
-
-            background: #ffffff;
-            color: #172033;
-            text-decoration: none;
-
-            box-shadow:
-                0 2px 4px rgba(35, 55, 85, 0.08),
-                0 8px 18px rgba(35, 55, 85, 0.14),
-                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
-                -4px -4px 12px rgba(255, 255, 255, 0.95);
-
-            overflow: hidden;
-
-            transition:
-                box-shadow 0.15s ease,
-                transform 0.15s ease;
-        }
-
-        .caucasusContainerTracking-button:hover {
-            box-shadow:
-                0 3px 5px rgba(35, 55, 85, 0.10),
-                0 10px 22px rgba(35, 55, 85, 0.18),
-                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
-                -4px -4px 12px rgba(255, 255, 255, 0.95);
-        }
-
-        .caucasusContainerTracking-button:active {
-            transform: scale(0.99);
-        }
-
-.caucasusContainerTracking-logo {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    object-fit: contain;
-    transform: translateX(12px) scale(1.5);
-    transform-origin: center;
-}
-
-.caucasusContainerTracking-divider {
-    width: 2px;
-    height: 42px;
-    margin: 0 12px;
-    flex-shrink: 0;
-    background: #d9e0e9;
-}
-
-.caucasusContainerTracking-text {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.15;
-    transform: translateX(12px);
-}
-
-.caucasusContainerTracking-text span {
-    display: block;
-}
-
+        .transport-arrow,
+        .bidcars-arrow,
         .caucasusContainerTracking-arrow {
-            margin-left: 8px;
             flex-shrink: 0;
-            font-size: 30px;
+            margin-left: 8px;
             color: #172033;
+            font-size: 30px;
+        }
+
+        /* Preserve the original divider positioning */
+        .transport-button .transport-divider,
+        .caucasusContainerTracking-button .caucasusContainerTracking-divider {
+            transform: translateX(30px);
         }
 
         @media (max-width: 420px) {
@@ -377,23 +223,21 @@
                 padding: 6px 10px;
             }
 
-            .transport-logo {
+            .transport-logo,
+            .caucasusContainerTracking-logo {
                 width: 48px;
                 height: 48px;
             }
 
-            .transport-divider {
-                height: 42px;
+            .transport-divider,
+            .bidcars-divider,
+            .caucasusContainerTracking-divider {
                 margin: 0 10px;
             }
 
-            .transport-text {
+            .transport-text,
+            .caucasusContainerTracking-text {
                 font-size: 15px;
-            }
-
-            .transport-arrow {
-                font-size: 30px;
-                margin-left: 6px;
             }
 
             .bidcars-logo {
@@ -401,64 +245,26 @@
                 height: 46px;
             }
 
-            .bidcars-divider {
-                margin: 0 9px;
-            }
-
             .bidcars-text {
                 font-size: 17px;
             }
 
-            .bidcars-arrow {
-                font-size: 30px;
-                margin-left: 6px;
-            }
-
-            .caucasusContainerTracking-logo {
-                width: 48px;
-                height: 48px;
-            }
-
-            .caucasusContainerTracking-divider {
-                margin: 0 10px;
-            }
-
-            .caucasusContainerTracking-text {
-                font-size: 15px;
-            }
-
+            .transport-arrow,
+            .bidcars-arrow,
             .caucasusContainerTracking-arrow {
-                font-size: 30px;
                 margin-left: 6px;
+                font-size: 30px;
             }
-        }
 
-        /* Move Transportation Price divider to the right */
-        .transport-button .transport-divider {
-            transform: translateX(30px);
-        }
-
-        @media (max-width: 420px) {
-            .transport-button .transport-divider {
+            .transport-button .transport-divider,
+            .caucasusContainerTracking-button .caucasusContainerTracking-divider {
                 transform: translateX(24px);
             }
         }
-        
-        .caucasusContainerTracking-button .caucasusContainerTracking-divider {
-    transform: translateX(30px);
-}
-
-@media (max-width: 420px) {
-    .caucasusContainerTracking-button .caucasusContainerTracking-divider {
-        transform: translateX(24px);
-    }
-}
-        
     </style>
 </head>
 
 <body>
-
     <!-- Pulse AutoImport logo -->
     <img
         class="brand-logo"
@@ -467,7 +273,6 @@
     >
 
     <div class="buttons">
-
         <!-- Transportation Price -->
         <a
             class="transport-button"
@@ -512,30 +317,28 @@
             <div class="bidcars-arrow">›</div>
         </a>
 
-        <!-- caucasusContainerTracking -->
+        <!-- Container Tracking -->
         <a
             class="caucasusContainerTracking-button"
-href="https://caucasusauto.com/en/services/container-tracking"
+            href="https://caucasusauto.com/en/services/container-tracking"
             target="_blank"
             rel="noopener noreferrer"
         >
             <img
                 class="caucasusContainerTracking-logo"
                 src="./caucasus-logo.jpeg"
-                alt="caucasusContainerTracking"
+                alt="Container Tracking"
             >
 
             <div class="caucasusContainerTracking-divider"></div>
- 
-<div class="caucasusContainerTracking-text">
-    <span>Container</span>
-    <span>Tracking</span>
-</div>
+
+            <div class="caucasusContainerTracking-text">
+                <span>Container</span>
+                <span>Tracking</span>
+            </div>
 
             <div class="caucasusContainerTracking-arrow">›</div>
         </a>
-
     </div>
-
 </body>
 </html>
