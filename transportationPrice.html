@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Pulse AutoImport</title>
 
 <style>
@@ -62,8 +62,9 @@ input{
     flex:1;
     border:0;
     outline:0;
-    font-size:12px;
+    font-size:16px !important;
     padding:14px 6px;
+    -webkit-text-size-adjust:100%;
     background:transparent
 }
 
@@ -196,44 +197,19 @@ button{
         font-size:15px
     }
 }
-
-.home-button{
-    position:fixed;
-    top:18px;
-    left:18px;
-    width:46px;
-    height:46px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:#2864e8;
-    color:#ffffff;
-    font-size:30px;
-    font-weight:700;
-    text-decoration:none;
-    z-index:1000;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
-}
-
-.home-button:active{
-    transform:scale(.95);
-}
-
 </style>
 </head>
 
 <body>
-
-<a class="home-button" href="entry.html" aria-label="Home">⌂</a>
 <style>
 #entry-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
 #entry-screen button{width:max-content;display:inline-block;padding:10px 18px;border:0;border-radius:5px;background:#2563eb;color:#fff;font-size:14px;font-weight:600;cursor:pointer;}
 #entry-screen button:hover{background:#1d4ed8;}
-#transportation-app{display:none;}
+#transportation-app {
+    display: block;
+}
 </style>
-<div id="entry-screen"><button id="enter-transportation">Transportation Price</button></div>
-<div id="transportation-app">
+<div id="transportation-app" style="display: block;">
 
 
 <div class="wrap">
@@ -1818,10 +1794,6 @@ searchInput.addEventListener("keydown",function(event){
 
 </div>
 <script>
-document.getElementById('enter-transportation').addEventListener('click',function(){
- document.getElementById('entry-screen').style.display='none';
- document.getElementById('transportation-app').style.display='block';
-});
 </script>
 </body>
 </html>
