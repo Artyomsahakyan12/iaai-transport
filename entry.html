@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,50 +69,8 @@
                 min-width: 0;
             }
         }
-    </style>
-</head>
 
-<body>
-
-    <div class="buttons">
-
-        <a class="tool-button" href="transportationPrice.html">
-            Transportation Price
-        </a>
-
-        <a
-            class="tool-button"
-            href="https://bid.cars/en/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            BidCars
-        </a>
-
-        <a
-            class="tool-button"
-            href="https://www.searates.com/"
-            id="open-searates"
-        >
-            SeaRates
-        </a>
-
-    </div>
-
-    <div id="searates-screen">
-        <button id="close-searates" type="button" aria-label="Back to home">
-            ×
-        </button>
-
-        <iframe
-            id="searates-frame"
-            src="about:blank"
-            title="SeaRates"
-        ></iframe>
-    </div>
-
-    <style>
-        #searates-screen {
+        .site-screen {
             display: none;
             position: fixed;
             inset: 0;
@@ -119,13 +78,13 @@
             background: #ffffff;
         }
 
-        #searates-frame {
+        .site-frame {
             width: 100%;
             height: 100%;
             border: 0;
         }
 
-        #close-searates {
+        .close-button {
             position: absolute;
             top: 14px;
             left: 14px;
@@ -147,12 +106,98 @@
             cursor: pointer;
         }
     </style>
+</head>
+
+<body>
+
+    <div class="buttons">
+
+        <a class="tool-button" href="transportationPrice.html">
+            Transportation Price
+        </a>
+
+        <a
+            class="tool-button"
+            href="https://bid.cars/en/"
+            id="open-bidcars"
+        >
+            BidCars
+        </a>
+
+        <a
+            class="tool-button"
+            href="https://www.searates.com/"
+            id="open-searates"
+        >
+            SeaRates
+        </a>
+
+    </div>
+
+    <!-- BidCars iframe -->
+    <div id="bidcars-screen" class="site-screen">
+
+        <button
+            id="close-bidcars"
+            class="close-button"
+            type="button"
+            aria-label="Back to home"
+        >
+            ×
+        </button>
+
+        <iframe
+            id="bidcars-frame"
+            class="site-frame"
+            src="about:blank"
+            title="BidCars"
+        ></iframe>
+
+    </div>
+
+    <!-- SeaRates iframe -->
+    <div id="searates-screen" class="site-screen">
+
+        <button
+            id="close-searates"
+            class="close-button"
+            type="button"
+            aria-label="Back to home"
+        >
+            ×
+        </button>
+
+        <iframe
+            id="searates-frame"
+            class="site-frame"
+            src="about:blank"
+            title="SeaRates"
+        ></iframe>
+
+    </div>
 
     <script>
+        const openBidCars = document.getElementById('open-bidcars');
+        const closeBidCars = document.getElementById('close-bidcars');
+        const bidCarsScreen = document.getElementById('bidcars-screen');
+        const bidCarsFrame = document.getElementById('bidcars-frame');
+
         const openSeaRates = document.getElementById('open-searates');
         const closeSeaRates = document.getElementById('close-searates');
         const seaRatesScreen = document.getElementById('searates-screen');
         const seaRatesFrame = document.getElementById('searates-frame');
+
+        openBidCars.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            bidCarsFrame.src = 'https://bid.cars/en/';
+            bidCarsScreen.style.display = 'block';
+        });
+
+        closeBidCars.addEventListener('click', function () {
+            bidCarsScreen.style.display = 'none';
+            bidCarsFrame.src = 'about:blank';
+        });
 
         openSeaRates.addEventListener('click', function (event) {
             event.preventDefault();
