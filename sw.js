@@ -16,13 +16,19 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
     const request = event.request;
+    const url = new URL(request.url);
 
     // Մի միջամտել POST և այլ ոչ-GET հարցումներին
     if (request.method !== "GET") {
         return;
     }
 
-    // Բոլոր GET հարցումները միշտ վերցնել ցանցից՝ առանց cache-ի
+    // Արտաքին կայքերը թողնել browser-ի սովորական cache-ի կառավարմանը
+    if (url.origin !== self.location.origin) {
+        return;
+    }
+
+    // Քո app-ի սեփական ֆայլերը միշտ վերցնել ցանցից
     event.respondWith(
         fetch(request, {
             cache: "no-store"
