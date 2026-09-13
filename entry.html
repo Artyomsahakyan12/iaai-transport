@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -232,26 +233,77 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-sizing: border-box;
 
             width: 72%;
             max-width: 360px;
             min-width: 0;
             height: 64px;
 
+            padding: 6px 10px;
+            border: 1px solid rgba(190, 201, 218, 0.75);
             border-radius: 22px;
-            background: #2864e8;
-            color: #ffffff;
 
-            font-size: 18px;
-            font-weight: 700;
-            text-align: center;
+            background: #ffffff;
+            color: #172033;
             text-decoration: none;
 
-            transition: background 0.15s ease;
+            box-shadow:
+                0 2px 4px rgba(35, 55, 85, 0.08),
+                0 8px 18px rgba(35, 55, 85, 0.14),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+
+            overflow: hidden;
+
+            transition:
+                box-shadow 0.15s ease,
+                transform 0.15s ease;
         }
 
         .searates-button:hover {
-            background: #1d4ed8;
+            box-shadow:
+                0 3px 5px rgba(35, 55, 85, 0.10),
+                0 10px 22px rgba(35, 55, 85, 0.18),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+        }
+
+        .searates-button:active {
+            transform: scale(0.99);
+        }
+
+        .searates-logo {
+            width: 78px;
+            height: 48px;
+            flex-shrink: 0;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .searates-divider {
+            width: 2px;
+            height: 42px;
+            margin: 0 12px;
+            flex-shrink: 0;
+            background: #d9e0e9;
+        }
+
+        .searates-text {
+            flex: 1;
+            min-width: 0;
+
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .searates-arrow {
+            margin-left: 8px;
+            flex-shrink: 0;
+            font-size: 30px;
+            color: #172033;
         }
 
         @media (max-width: 420px) {
@@ -298,6 +350,24 @@
             }
 
             .bidcars-arrow {
+                font-size: 30px;
+                margin-left: 6px;
+            }
+
+            .searates-logo {
+                width: 72px;
+                height: 46px;
+            }
+
+            .searates-divider {
+                margin: 0 9px;
+            }
+
+            .searates-text {
+                font-size: 17px;
+            }
+
+            .searates-arrow {
                 font-size: 30px;
                 margin-left: 6px;
             }
@@ -360,7 +430,21 @@
             target="_blank"
             rel="noopener noreferrer"
         >
-            SeaRates
+
+            <img
+                class="searates-logo"
+                src="searates-logo.jpeg"
+                alt="SeaRates"
+            >
+
+            <div class="searates-divider"></div>
+
+            <div class="searates-text">
+                SeaRates
+            </div>
+
+            <div class="searates-arrow">›</div>
+
         </a>
 
     </div>
