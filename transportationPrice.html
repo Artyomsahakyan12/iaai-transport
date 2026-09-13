@@ -1734,11 +1734,17 @@ function doSearch(){
         return;
     }
 
-    const found = database.filter(item =>
-        `${item.state} ${item.name} ${item.auction}`
-            .toLowerCase()
-            .includes(query)
+  const found = database.filter(item => {
+    const state = item.state.toLowerCase();
+    const name = item.name.toLowerCase();
+    const auction = item.auction.toLowerCase();
+
+    return (
+        state.startsWith(query) ||
+        name.startsWith(query) ||
+        auction.startsWith(query)
     );
+});
 
     if(found.length === 0){
         result.className = "message";
