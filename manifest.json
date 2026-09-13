@@ -1,8 +1,16 @@
 {
-  "name": "IAAI Transport",
-  "short_name": "IAAI Transport",
-  "start_url": "./",
+  "name": "Pulse AutoImport",
+  "short_name": "Pulse AutoImport",
+  "start_url": "./entry.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#f5f7fa",
-  "theme_color": "#172033"
+  "background_color": "#f5f6fa",
+  "theme_color": "#172033",
+  "icons": [
+    {
+      "src": "./pulseAutoImport-appIcon.PNG",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
 }
