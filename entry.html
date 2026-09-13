@@ -16,10 +16,20 @@
             margin: 0;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             background: #f5f6fa;
             font-family: Arial, sans-serif;
+        }
+
+        /* Pulse AutoImport logo */
+        .brand-logo {
+            width: 260px;
+            max-width: 70%;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 55px;
         }
 
         .buttons {
@@ -312,6 +322,12 @@
         }
 
         @media (max-width: 420px) {
+            .brand-logo {
+                width: 260px;
+                max-width: 70%;
+                margin-bottom: 55px;
+            }
+
             .transport-button,
             .bidcars-button,
             .searates-button {
@@ -377,22 +393,28 @@
                 margin-left: 6px;
             }
         }
-        
-        /* Move Transportation Price divider to the right */
-.transport-button .transport-divider {
-    transform: translateX(30px);
-}
 
-@media (max-width: 420px) {
-    .transport-button .transport-divider {
-        transform: translateX(24px);
-    }
-}
-        
+        /* Move Transportation Price divider to the right */
+        .transport-button .transport-divider {
+            transform: translateX(30px);
+        }
+
+        @media (max-width: 420px) {
+            .transport-button .transport-divider {
+                transform: translateX(24px);
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Pulse AutoImport logo -->
+    <img
+        class="brand-logo"
+        src="pulseAutoImport-logo.PNG"
+        alt="Pulse AutoImport"
+    >
 
     <div class="buttons">
 
