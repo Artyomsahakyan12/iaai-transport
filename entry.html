@@ -2,20 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Transportation Price</title>
-
   <style>
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
+      width: 100%;
+      min-height: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 16px;
       background: #ffffff;
       font-family: Arial, sans-serif;
     }
@@ -28,21 +35,15 @@
       color: #ffffff;
       font-size: 12px;
       font-weight: 600;
+      line-height: 1.2;
       text-decoration: none;
       white-space: nowrap;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
     }
-
-    a:active {
-      background: #1d4ed8;
-    }
   </style>
 </head>
-
 <body>
-  <a href="transportationPrice.html">
-    Transportation Price
-  </a>
+  <a href="transportationPrice.html">Transportation Price</a>
 </body>
 </html>
