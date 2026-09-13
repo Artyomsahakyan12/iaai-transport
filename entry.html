@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,12 +36,11 @@
             align-items: center;
             justify-content: center;
 
-            width: 46%;
+            width: 72%;
             max-width: 360px;
-            min-width: 220px;
+            min-width: 0;
             height: 64px;
 
-            border: none;
             border-radius: 22px;
             background: #2864e8;
             color: #ffffff;
@@ -151,15 +149,119 @@
             color: #172033;
         }
 
+        /* BidCars button */
+        .bidcars-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+
+            width: 72%;
+            max-width: 360px;
+            min-width: 0;
+            height: 64px;
+
+            padding: 6px 10px;
+            border: 1px solid rgba(190, 201, 218, 0.75);
+            border-radius: 22px;
+
+            background: #ffffff;
+            color: #172033;
+            text-decoration: none;
+
+            box-shadow:
+                0 2px 4px rgba(35, 55, 85, 0.08),
+                0 8px 18px rgba(35, 55, 85, 0.14),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+
+            overflow: hidden;
+
+            transition:
+                box-shadow 0.15s ease,
+                transform 0.15s ease;
+        }
+
+        .bidcars-button:hover {
+            box-shadow:
+                0 3px 5px rgba(35, 55, 85, 0.10),
+                0 10px 22px rgba(35, 55, 85, 0.18),
+                0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+                -4px -4px 12px rgba(255, 255, 255, 0.95);
+        }
+
+        .bidcars-button:active {
+            transform: scale(0.99);
+        }
+
+        .bidcars-logo {
+            width: 78px;
+            height: 48px;
+            flex-shrink: 0;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .bidcars-divider {
+            width: 2px;
+            height: 42px;
+            margin: 0 12px;
+            flex-shrink: 0;
+            background: #d9e0e9;
+        }
+
+        .bidcars-text {
+            flex: 1;
+            min-width: 0;
+
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .bidcars-arrow {
+            margin-left: 8px;
+            flex-shrink: 0;
+            font-size: 30px;
+            color: #172033;
+        }
+
+        /* SeaRates button */
+        .searates-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 72%;
+            max-width: 360px;
+            min-width: 0;
+            height: 64px;
+
+            border-radius: 22px;
+            background: #2864e8;
+            color: #ffffff;
+
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+
+            transition: background 0.15s ease;
+        }
+
+        .searates-button:hover {
+            background: #1d4ed8;
+        }
+
         @media (max-width: 420px) {
-            .tool-button {
+            .transport-button,
+            .bidcars-button,
+            .searates-button {
                 width: 72%;
-                min-width: 0;
             }
 
             .transport-button {
-                width: 72%;
-                height: 64px;
                 padding: 6px 10px;
             }
 
@@ -181,6 +283,24 @@
                 font-size: 30px;
                 margin-left: 6px;
             }
+
+            .bidcars-logo {
+                width: 72px;
+                height: 46px;
+            }
+
+            .bidcars-divider {
+                margin: 0 9px;
+            }
+
+            .bidcars-text {
+                font-size: 17px;
+            }
+
+            .bidcars-arrow {
+                font-size: 30px;
+                margin-left: 6px;
+            }
         }
     </style>
 </head>
@@ -189,7 +309,9 @@
 
     <div class="buttons">
 
+        <!-- Transportation Price -->
         <a class="transport-button" href="transportationPrice.html">
+
             <img
                 class="transport-logo"
                 src="caucasus-logo.jpeg"
@@ -204,19 +326,36 @@
             </div>
 
             <div class="transport-arrow">›</div>
+
         </a>
 
+        <!-- BidCars -->
         <a
-            class="tool-button"
+            class="bidcars-button"
             href="https://bid.cars/en/"
             target="_blank"
             rel="noopener noreferrer"
         >
-            BidCars
+
+            <img
+                class="bidcars-logo"
+                src="bidcars-logo.jpeg"
+                alt="BidCars"
+            >
+
+            <div class="bidcars-divider"></div>
+
+            <div class="bidcars-text">
+                BidCars
+            </div>
+
+            <div class="bidcars-arrow">›</div>
+
         </a>
 
+        <!-- SeaRates -->
         <a
-            class="tool-button"
+            class="searates-button"
             href="https://www.searates.com/"
             target="_blank"
             rel="noopener noreferrer"
