@@ -1,6 +1,6 @@
 {
   "name": "Pulse AutoImport",
-  "short_name": "Pulse AutoImport",
+  "short_name": "PulseAutoImport",
   "start_url": "./entry.html",
   "scope": "./",
   "display": "standalone",
