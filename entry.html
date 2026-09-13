@@ -68,13 +68,14 @@
                 min-width: 0;
             }
         }
- .transport-button {
+ ..transport-button {
     display: flex;
     align-items: center;
+    box-sizing: border-box;
     width: 70%;
     max-width: 540px;
     min-height: 115px;
-    padding: 14px 22px;
+    padding: 12px 18px;
     border-radius: 28px;
     background: #ffffff;
     color: #172033;
@@ -82,12 +83,12 @@
     box-shadow:
         8px 8px 20px rgba(35, 55, 85, 0.10),
         -6px -6px 16px rgba(255, 255, 255, 0.95);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
 }
 
 .transport-logo {
-    width: 86px;
-    height: 86px;
+    width: 76px;
+    height: 76px;
     flex-shrink: 0;
     border-radius: 50%;
     object-fit: contain;
@@ -95,54 +96,58 @@
 
 .transport-divider {
     width: 2px;
-    height: 70px;
-    margin: 0 22px;
+    height: 68px;
+    margin: 0 14px;
+    flex-shrink: 0;
     background: #d9e0e9;
 }
 
 .transport-text {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 23px;
+    font-size: 19px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
 }
 
 .transport-arrow {
-    margin-left: 16px;
-    font-size: 40px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    font-size: 34px;
     font-weight: 300;
     color: #172033;
 }
+
 @media (max-width: 520px) {
     .transport-button {
         width: 70%;
         min-height: 112px;
-        padding: 12px;
+        padding: 12px 10px;
         border-radius: 26px;
     }
 
     .transport-logo {
-        width: 72px;
-        height: 72px;
+        width: 68px;
+        height: 68px;
     }
 
     .transport-divider {
-        height: 64px;
-        margin: 0 12px;
+        height: 62px;
+        margin: 0 9px;
     }
 
     .transport-text {
-        font-size: 19px;
+        font-size: 17px;
     }
 
     .transport-arrow {
-        margin-left: 8px;
-        font-size: 34px;
+        margin-left: 5px;
+        font-size: 31px;
     }
 }
         
