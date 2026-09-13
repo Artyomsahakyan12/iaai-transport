@@ -67,7 +67,7 @@
             outline: none;
         }
 
-        /* Ընդհանուր կառուցվածք բոլոր բրենդային կոճակների համար */
+        /* Ընդհանուր կառուցվածք Transportation և BidCars կոճակների համար */
         .brand-button {
             display: flex;
             align-items: center;
@@ -92,7 +92,8 @@
             overflow: hidden;
         }
 
-        /* Լոգոյի հատվածը հաստատուն է՝ գծերը հավասարեցնելու համար */
+        /* Լոգոյի համար հաստատուն լայնություն,
+           որպեսզի երկու բաժանարար գծերը նույն դիրքում լինեն */
         .brand-logo-area {
             width: 220px;
             height: 100%;
@@ -110,12 +111,6 @@
         }
 
         .bidcars-logo {
-            width: 150px;
-            height: 95px;
-            object-fit: contain;
-        }
-
-        .searates-logo {
             width: 150px;
             height: 95px;
             object-fit: contain;
@@ -182,11 +177,6 @@
             }
 
             .bidcars-logo {
-                width: 112px;
-                height: 78px;
-            }
-
-            .searates-logo {
                 width: 112px;
                 height: 78px;
             }
@@ -268,28 +258,12 @@
 
         <!-- SeaRates -->
         <a
-            class="brand-button"
+            class="tool-button"
             href="https://www.searates.com/"
             target="_blank"
             rel="noopener noreferrer"
         >
-
-            <div class="brand-logo-area">
-                <img
-                    class="searates-logo"
-                    src="searates-logo.jpeg"
-                    alt="SeaRates"
-                >
-            </div>
-
-            <div class="brand-divider"></div>
-
-            <div class="brand-text">
-                <span>SeaRates</span>
-            </div>
-
-            <div class="brand-arrow">›</div>
-
+            SeaRates
         </a>
 
     </div>
