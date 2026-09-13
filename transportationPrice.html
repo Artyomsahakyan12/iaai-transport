@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pulse AutoImport</title>
 
 <style>
@@ -60,14 +60,11 @@ h1{
 
 input{
     flex:1;
-    min-width:0;
-    width:100%;
     border:0;
     outline:0;
-    font-size:16px !important;
+    font-size:12px;
     padding:14px 6px;
-    background:transparent;
-    -webkit-text-size-adjust:100%;
+    background:transparent
 }
 
 button{
@@ -200,8 +197,6 @@ button{
     }
 }
 
-
-/* Home button */
 .home-button{
     position:fixed;
     top:18px;
@@ -220,12 +215,26 @@ button{
     z-index:1000;
     box-shadow:0 4px 12px rgba(0,0,0,.15);
 }
-.home-button:active{transform:scale(.95);}
+
+.home-button:active{
+    transform:scale(.95);
+}
+
 </style>
 </head>
 
 <body>
+
 <a class="home-button" href="entry.html" aria-label="Home">⌂</a>
+<style>
+#entry-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
+#entry-screen button{width:max-content;display:inline-block;padding:10px 18px;border:0;border-radius:5px;background:#2563eb;color:#fff;font-size:14px;font-weight:600;cursor:pointer;}
+#entry-screen button:hover{background:#1d4ed8;}
+#transportation-app{display:none;}
+</style>
+<div id="entry-screen"><button id="enter-transportation">Transportation Price</button></div>
+<div id="transportation-app">
+
 
 <div class="wrap">
 
@@ -886,6 +895,26 @@ const copartDatabase = [
         "state": "IL",
         "name": "Chicago South",
         "price": "$2022"
+    },
+    {
+        "state": "IL",
+        "name": "Peoria",
+        "price": "$2116"
+    },
+    {
+        "state": "IL",
+        "name": "Southern Illinois",
+        "price": "$2116"
+    },
+    {
+        "state": "IL",
+        "name": "St.Louis",
+        "price": "$1941"
+    },
+    {
+        "state": "IL",
+        "name": "Wheeling",
+        "price": "$2067"
     },
     {
         "state": "IN",
@@ -1786,5 +1815,13 @@ searchInput.addEventListener("keydown",function(event){
 
 </script>
 
+
+</div>
+<script>
+document.getElementById('enter-transportation').addEventListener('click',function(){
+ document.getElementById('entry-screen').style.display='none';
+ document.getElementById('transportation-app').style.display='block';
+});
+</script>
 </body>
 </html>
