@@ -1,4 +1,4 @@
-const CACHE_NAME = "pulse-autoimport-v5";
+const CACHE_NAME = "pulse-autoimport-v6";
 
 self.addEventListener("install", event => {
   self.skipWaiting();
@@ -18,8 +18,14 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   const request = event.request;
+  const url = new URL(request.url);
 
-  // HTML էջերը միշտ վերցնել ցանցից՝ հին էջ չցուցադրելու համար
+  // Արտաքին կայքերը չպահել Service Worker-ի cache-ում
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // HTML էջերը միշտ վերցնել ցանցից
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request, { cache: "no-store" })
@@ -28,7 +34,7 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  // Մնացած ֆայլերի համար սովորական network-first
+  // Սեփական ֆայլերի համար network-first
   event.respondWith(
     fetch(request)
       .then(response => {
