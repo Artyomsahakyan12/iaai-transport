@@ -79,67 +79,93 @@
             Transportation Price
         </a>
 
-       <button class="tool-button" id="open-bidcars" type="button">
-    BidCars
-</button>
+        <a
+            class="tool-button"
+            href="https://bid.cars/en/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            BidCars
+        </a>
+
+        <a
+            class="tool-button"
+            href="https://www.searates.com/"
+            id="open-searates"
+        >
+            SeaRates
+        </a>
 
     </div>
-<div id="bidcars-screen">
-    <button id="close-bidcars" type="button" aria-label="Back to home">×</button>
 
-    <iframe
-        id="bidcars-frame"
-        src="about:blank"
-        title="BidCars"
-    ></iframe>
-</div>
+    <div id="searates-screen">
+        <button id="close-searates" type="button" aria-label="Back to home">
+            ×
+        </button>
 
-<style>
-    #bidcars-screen {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        background: #ffffff;
-    }
+        <iframe
+            id="searates-frame"
+            src="about:blank"
+            title="SeaRates"
+        ></iframe>
+    </div>
 
-    #bidcars-frame {
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
+    <style>
+        #searates-screen {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #ffffff;
+        }
 
-    #close-bidcars {
-        position: absolute;
-        top: 14px;
-        left: 14px;
-        z-index: 10000;
-        width: 44px;
-        height: 44px;
-        border: 0;
-        border-radius: 50%;
-        background: white;
-        color: #111827;
-        font-size: 30px;
-        box-shadow: 0 3px 12px rgba(0,0,0,.18);
-    }
-</style>
+        #searates-frame {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
 
-<script>
-    const openBidCars = document.getElementById('open-bidcars');
-    const closeBidCars = document.getElementById('close-bidcars');
-    const bidCarsScreen = document.getElementById('bidcars-screen');
-    const bidCarsFrame = document.getElementById('bidcars-frame');
+        #close-searates {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 10000;
 
-    openBidCars.addEventListener('click', () => {
-        bidCarsFrame.src = 'https://bid.cars/en/';
-        bidCarsScreen.style.display = 'block';
-    });
+            width: 44px;
+            height: 44px;
 
-    closeBidCars.addEventListener('click', () => {
-        bidCarsScreen.style.display = 'none';
-        bidCarsFrame.src = 'about:blank';
-    });
-</script>
+            border: 0;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #111827;
+
+            font-size: 30px;
+            line-height: 44px;
+            text-align: center;
+
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        const openSeaRates = document.getElementById('open-searates');
+        const closeSeaRates = document.getElementById('close-searates');
+        const seaRatesScreen = document.getElementById('searates-screen');
+        const seaRatesFrame = document.getElementById('searates-frame');
+
+        openSeaRates.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            seaRatesFrame.src = 'https://www.searates.com/';
+            seaRatesScreen.style.display = 'block';
+        });
+
+        closeSeaRates.addEventListener('click', function () {
+            seaRatesScreen.style.display = 'none';
+            seaRatesFrame.src = 'about:blank';
+        });
+    </script>
+
 </body>
 </html>
