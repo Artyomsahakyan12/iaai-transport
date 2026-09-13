@@ -16,30 +16,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: Arial, sans-serif;
       background: #ffffff;
+      font-family: Arial, sans-serif;
     }
 
-    button {
+    a {
+      display: inline-block;
       padding: 5px 8px;
-      border: none;
       border-radius: 5px;
       background: #2563eb;
-      color: white;
+      color: #ffffff;
       font-size: 12px;
       font-weight: 600;
-      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    button:hover {
+    a:active {
       background: #1d4ed8;
     }
   </style>
 </head>
 
 <body>
- <button onclick="window.location.href='transportationPrice.html'">
-  Transportation Price
-</button>
+  <a href="transportationPrice.html">
+    Transportation Price
+  </a>
 </body>
 </html>
