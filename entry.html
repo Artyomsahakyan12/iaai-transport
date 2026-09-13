@@ -79,16 +79,67 @@
             Transportation Price
         </a>
 
-        <a
-            class="tool-button"
-            href="https://bid.cars/en/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            BidCars
-        </a>
+       <button class="tool-button" id="open-bidcars" type="button">
+    BidCars
+</button>
 
     </div>
+<div id="bidcars-screen">
+    <button id="close-bidcars" type="button" aria-label="Back to home">×</button>
 
+    <iframe
+        id="bidcars-frame"
+        src="about:blank"
+        title="BidCars"
+    ></iframe>
+</div>
+
+<style>
+    #bidcars-screen {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #ffffff;
+    }
+
+    #bidcars-frame {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    #close-bidcars {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        z-index: 10000;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        background: white;
+        color: #111827;
+        font-size: 30px;
+        box-shadow: 0 3px 12px rgba(0,0,0,.18);
+    }
+</style>
+
+<script>
+    const openBidCars = document.getElementById('open-bidcars');
+    const closeBidCars = document.getElementById('close-bidcars');
+    const bidCarsScreen = document.getElementById('bidcars-screen');
+    const bidCarsFrame = document.getElementById('bidcars-frame');
+
+    openBidCars.addEventListener('click', () => {
+        bidCarsFrame.src = 'https://bid.cars/en/';
+        bidCarsScreen.style.display = 'block';
+    });
+
+    closeBidCars.addEventListener('click', () => {
+        bidCarsScreen.style.display = 'none';
+        bidCarsFrame.src = 'about:blank';
+    });
+</script>
 </body>
 </html>
