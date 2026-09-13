@@ -2,19 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
   <title>Transportation Price</title>
 
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html,
     body {
       margin: 0;
+      padding: 0;
       width: 100%;
       min-height: 100%;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
@@ -26,24 +30,65 @@
       font-family: Arial, sans-serif;
     }
 
-    a {
-      display: inline-block;
-      padding: 16px 40px;
-      border-radius: 10px;
+    button {
+      display: block;
+      width: 85%;
+      max-width: 420px;
+      min-height: 82px;
+      padding: 18px 24px;
+      border: 0;
+      border-radius: 12px;
       background: #2563eb;
       color: #ffffff;
+      font-family: Arial, sans-serif;
       font-size: 24px;
       font-weight: 600;
       line-height: 1.2;
-      text-decoration: none;
-      white-space: nowrap;
+      text-align: center;
+      -webkit-appearance: none;
+      appearance: none;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
+      outline: none;
+      box-shadow: none;
+      transform: none;
+      transition: none;
+      animation: none;
+    }
+
+    button:hover,
+    button:active,
+    button:focus,
+    button:focus-visible {
+      background: #2563eb;
+      color: #ffffff;
+      transform: none;
+      scale: 1;
+      box-shadow: none;
+      outline: none;
     }
   </style>
 </head>
 
 <body>
-  <a href="transportationPrice.html">Transportation Price</a>
+  <button id="transportButton" type="button">Transportation Price</button>
+
+  <script>
+    const button = document.getElementById('transportButton');
+    let opened = false;
+
+    function openTransportationPage(event) {
+      if (opened) return;
+      opened = true;
+
+      if (event) event.preventDefault();
+      window.location.href = 'transportationPrice.html';
+    }
+
+    button.addEventListener('touchend', openTransportationPage, { passive: false });
+    button.addEventListener('click', openTransportationPage);
+  </script>
 </body>
 </html>
