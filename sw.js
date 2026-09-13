@@ -1,4 +1,4 @@
-const CACHE_NAME = "iaai-transport-v2";
+const CACHE_NAME = "pulse-autoimport-v4";
 
 self.addEventListener("install", event => {
     self.skipWaiting();
