@@ -207,19 +207,13 @@
 
       } else if (status === "pending") {
         setMessage(
-          "Your access request is pending. Please wait for admin approval.",
+          "Your access request is pending.",
           "waiting"
         );
 
       } else if (status === "rejected") {
         showRejected();
-
-      } else {
-        setMessage(
-          "Device ID is not registered yet.",
-          "waiting"
-        );
-      }
+      } 
     }
 
     async function pollStatus() {
