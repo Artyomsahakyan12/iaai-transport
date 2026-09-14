@@ -186,6 +186,21 @@
       }, 700);
     }
 
+    function showRejected() {
+      if (redirecting) {
+        return;
+      }
+
+      redirecting = true;
+      stopStatusPolling();
+
+      setMessage("Մուտքը մերժված է ❌", "rejected");
+
+      redirectTimer = setTimeout(() => {
+        window.location.href = "./entry.html";
+      }, 1500);
+    }
+
     function showStatus(status) {
       if (status === "approved") {
         showApproved();
@@ -197,12 +212,7 @@
         );
 
       } else if (status === "rejected") {
-        stopStatusPolling();
-
-        setMessage(
-          "Մուտքը մերժված է ❌",
-          "rejected"
-        );
+        showRejected();
 
       } else {
         setMessage(
@@ -235,10 +245,8 @@
 
       stopStatusPolling();
 
-      // Անմիջապես ստուգում ենք status-ը
       pollStatus();
 
-      // Հետո ստուգում ենք յուրաքանչյուր 2.5 վայրկյանը մեկ
       statusTimer = setInterval(() => {
         pollStatus();
       }, 2500);
@@ -292,6 +300,12 @@
       }
 
       stopStatusPolling();
+
+      if (redirectTimer) {
+        clearTimeout(redirectTimer);
+        redirectTimer = null;
+      }
+
       redirecting = false;
       currentDeviceId = deviceId;
 
