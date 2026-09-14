@@ -132,6 +132,11 @@
     const message = document.getElementById("message");
     const description = document.getElementById("description");
 
+    let statusTimer = null;
+    let currentDeviceId = null;
+    let redirectTimer = null;
+    let redirecting = false;
+
     function setMessage(text, className = "") {
       message.textContent = text;
       message.className = "message " + className;
@@ -159,10 +164,24 @@
       return data;
     }
 
+    function stopStatusPolling() {
+      if (statusTimer) {
+        clearInterval(statusTimer);
+        statusTimer = null;
+      }
+    }
+
     function showApproved() {
+      if (redirecting) {
+        return;
+      }
+
+      redirecting = true;
+      stopStatusPolling();
+
       setMessage("Մուտքը թույլատրված է ✅", "approved");
 
-      setTimeout(() => {
+      redirectTimer = setTimeout(() => {
         window.location.href = "./transportationPrice.html";
       }, 700);
     }
@@ -170,16 +189,59 @@
     function showStatus(status) {
       if (status === "approved") {
         showApproved();
+
       } else if (status === "pending") {
         setMessage(
           "Ձեր access-ի հարցումը սպասման մեջ է։ Սպասիր admin-ի հաստատմանը։",
           "waiting"
         );
+
       } else if (status === "rejected") {
-        setMessage("You’re rejected ❌", "rejected");
+        stopStatusPolling();
+
+        setMessage(
+          "Մուտքը մերժված է ❌",
+          "rejected"
+        );
+
       } else {
-        setMessage("Device ID-ն դեռ գրանցված չէ։", "waiting");
+        setMessage(
+          "Device ID-ն դեռ գրանցված չէ։",
+          "waiting"
+        );
       }
+    }
+
+    async function pollStatus() {
+      if (!currentDeviceId || redirecting) {
+        return;
+      }
+
+      try {
+        const data = await callFunction({
+          action: "check",
+          device_id: currentDeviceId
+        });
+
+        showStatus(data.status);
+
+      } catch (error) {
+        console.error("Status polling error:", error);
+      }
+    }
+
+    function startStatusPolling(deviceId) {
+      currentDeviceId = deviceId;
+
+      stopStatusPolling();
+
+      // Անմիջապես ստուգում ենք status-ը
+      pollStatus();
+
+      // Հետո ստուգում ենք յուրաքանչյուր 2.5 վայրկյանը մեկ
+      statusTimer = setInterval(() => {
+        pollStatus();
+      }, 2500);
     }
 
     async function checkSavedDevice() {
@@ -194,6 +256,8 @@
       submitBtn.disabled = true;
       changeBtn.style.display = "block";
 
+      currentDeviceId = savedId;
+
       try {
         const data = await callFunction({
           action: "check",
@@ -201,8 +265,17 @@
         });
 
         showStatus(data.status);
+
+        if (data.status === "pending") {
+          startStatusPolling(savedId);
+        }
+
       } catch (error) {
-        setMessage("Ստուգման ժամանակ սխալ առաջացավ։", "rejected");
+        setMessage(
+          "Ստուգման ժամանակ սխալ առաջացավ։",
+          "rejected"
+        );
+
         console.error(error);
       }
     }
@@ -218,8 +291,13 @@
         return;
       }
 
+      stopStatusPolling();
+      redirecting = false;
+      currentDeviceId = deviceId;
+
       submitBtn.disabled = true;
       deviceInput.disabled = true;
+
       setMessage("Ուղարկվում է հարցումը…");
 
       try {
@@ -231,6 +309,11 @@
         changeBtn.style.display = "block";
 
         showStatus(data.status);
+
+        if (data.status === "pending") {
+          startStatusPolling(deviceId);
+        }
+
       } catch (error) {
         deviceInput.disabled = false;
         submitBtn.disabled = false;
@@ -245,12 +328,23 @@
     });
 
     changeBtn.addEventListener("click", () => {
+      stopStatusPolling();
+
+      if (redirectTimer) {
+        clearTimeout(redirectTimer);
+        redirectTimer = null;
+      }
+
+      currentDeviceId = null;
+      redirecting = false;
+
       localStorage.removeItem(STORAGE_KEY);
 
       deviceInput.value = "";
       deviceInput.disabled = false;
       submitBtn.disabled = false;
       changeBtn.style.display = "none";
+
       setMessage("");
     });
 
