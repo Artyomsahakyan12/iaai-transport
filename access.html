@@ -192,11 +192,28 @@
       }, 1500);
     }
 
+    function showBlocked() {
+      stopStatusPolling();
+
+      redirecting = false;
+      currentDeviceId = null;
+
+      deviceInput.disabled = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = "New Request";
+
+      setMessage("Your ID blocked", "rejected");
+    }
+
     function showStatus(status) {
       if (status === "approved") {
         showApproved();
 
       } else if (status === "pending") {
+        deviceInput.disabled = true;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Request";
+
         setMessage(
           "Your access request is pending.",
           "waiting"
@@ -204,6 +221,9 @@
 
       } else if (status === "rejected") {
         showRejected();
+
+      } else if (status === "not_found") {
+        showBlocked();
       }
     }
 
@@ -295,6 +315,7 @@
 
       submitBtn.disabled = true;
       deviceInput.disabled = true;
+      submitBtn.textContent = "Request";
 
       setMessage("Sending request");
 
@@ -314,6 +335,7 @@
       } catch (error) {
         deviceInput.disabled = false;
         submitBtn.disabled = false;
+        submitBtn.textContent = "New Request";
 
         setMessage(
           "An error occurred. Please try again.",
