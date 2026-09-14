@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,10 +31,6 @@
             justify-content: center;
             background: #f5f6fa;
             font-family: Arial, sans-serif;
-        }
-
-        body.modal-open {
-            overflow: hidden;
         }
 
         .brand-logo {
@@ -118,14 +113,6 @@
             transition:
                 box-shadow 0.15s ease,
                 transform 0.15s ease;
-        }
-
-        .transport-button {
-            font-family: inherit;
-            font-size: inherit;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
         }
 
         .transport-button:hover,
@@ -219,125 +206,6 @@
             transform: translateX(30px);
         }
 
-        /* =========================================
-           TRANSPORTATION PRICE POPUP
-        ========================================= */
-
-        .access-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 18px;
-
-            background: rgba(15, 23, 42, 0.58);
-            backdrop-filter: blur(7px);
-            -webkit-backdrop-filter: blur(7px);
-
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-
-            transition:
-                opacity 0.28s ease,
-                visibility 0.28s ease;
-        }
-
-        .access-modal.active {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-
-        /* Small iOS-style alert view */
-        .access-modal-content {
-            position: relative;
-
-        width: min(80%, 350px);
-    height: min(450px, 70vh);
-
-            background: #ffffff;
-            border-radius: 26px;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 20px 70px rgba(0, 0, 0, 0.28),
-                0 0 0 1px rgba(255, 255, 255, 0.65);
-
-            transform: translateY(25px) scale(0.94);
-            opacity: 0;
-
-            transition:
-                transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.28s ease;
-        }
-
-        .access-modal.active .access-modal-content {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-
-        .access-modal-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 5;
-
-            width: 38px;
-            height: 38px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border: none;
-            border-radius: 50%;
-
-            background: rgba(255, 255, 255, 0.92);
-            color: #172033;
-
-            font-size: 27px;
-            font-weight: 400;
-            line-height: 1;
-
-            cursor: pointer;
-
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
-
-            transition:
-                background 0.15s ease,
-                transform 0.15s ease;
-        }
-
-        .access-modal-close:hover {
-            background: #ffffff;
-            transform: scale(1.06);
-        }
-
-        .access-modal-close:active {
-            transform: scale(0.94);
-        }
-
-        .access-modal-close:focus-visible {
-            outline: 3px solid #2563eb;
-            outline-offset: 2px;
-        }
-
-        .access-frame {
-            display: block;
-
-            width: 100%;
-            height: 100%;
-
-            border: none;
-            background: #f5f6fa;
-        }
-
         @media (max-width: 420px) {
             .brand-logo {
                 width: 260px;
@@ -392,23 +260,6 @@
             .caucasusContainerTracking-button .caucasusContainerTracking-divider {
                 transform: translateX(24px);
             }
-
-            .access-modal {
-                padding: 10px;
-            }
-
-            .access-modal-content {
-                width: min(92%, 380px);
-                height: min(540px, 82vh);
-                border-radius: 24px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .access-modal,
-            .access-modal-content {
-                transition: none;
-            }
         }
     </style>
 </head>
@@ -423,10 +274,10 @@
 
     <div class="buttons">
         <!-- Transportation Price -->
-        <button
+        <a
             class="transport-button"
-            type="button"
-            id="transportButton"
+            href="./access.html"
+            target="_self"
         >
             <img
                 class="transport-logo"
@@ -442,7 +293,7 @@
             </div>
 
             <div class="transport-arrow">›</div>
-        </button>
+        </a>
 
         <!-- BidCars -->
         <a
@@ -465,7 +316,7 @@
 
             <div class="bidcars-arrow">›</div>
         </a>
-
+        
         <!-- Container Tracking -->
         <a
             class="caucasusContainerTracking-button"
@@ -489,90 +340,5 @@
             <div class="caucasusContainerTracking-arrow">›</div>
         </a>
     </div>
-
-    <!-- Transportation Price Access Popup -->
-    <div
-        class="access-modal"
-        id="accessModal"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Transportation Price Access"
-        aria-hidden="true"
-    >
-        <div class="access-modal-content">
-            <button
-                class="access-modal-close"
-                id="accessModalClose"
-                type="button"
-                aria-label="Close access window"
-            >
-                ×
-            </button>
-
-            <iframe
-                class="access-frame"
-                id="accessFrame"
-                src="about:blank"
-                title="Transportation Price Access"
-            ></iframe>
-        </div>
-    </div>
-
-    <script>
-        const transportButton = document.getElementById("transportButton");
-        const accessModal = document.getElementById("accessModal");
-        const accessModalClose = document.getElementById("accessModalClose");
-        const accessFrame = document.getElementById("accessFrame");
-
-        let lastFocusedElement = null;
-
-        function openAccessModal(event) {
-            event.preventDefault();
-
-            lastFocusedElement = document.activeElement;
-
-            // Load access.html inside the popup.
-            if (accessFrame.getAttribute("src") === "about:blank") {
-                accessFrame.src = "./access.html?popup=1";
-            }
-
-            accessModal.classList.add("active");
-            accessModal.setAttribute("aria-hidden", "false");
-            document.body.classList.add("modal-open");
-
-            accessModalClose.focus();
-        }
-
-        function closeAccessModal() {
-            accessModal.classList.remove("active");
-            accessModal.setAttribute("aria-hidden", "true");
-            document.body.classList.remove("modal-open");
-
-            if (lastFocusedElement) {
-                lastFocusedElement.focus();
-            }
-        }
-
-        transportButton.addEventListener("click", openAccessModal);
-
-        accessModalClose.addEventListener("click", closeAccessModal);
-
-        // Close by clicking the darkened background.
-        accessModal.addEventListener("click", function(event) {
-            if (event.target === accessModal) {
-                closeAccessModal();
-            }
-        });
-
-        // Close with the Escape key.
-        document.addEventListener("keydown", function(event) {
-            if (
-                event.key === "Escape" &&
-                accessModal.classList.contains("active")
-            ) {
-                closeAccessModal();
-            }
-        });
-    </script>
 </body>
 </html>
