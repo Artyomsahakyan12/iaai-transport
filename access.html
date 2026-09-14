@@ -97,10 +97,10 @@
 
 <body>
   <div class="card">
-    <h1>Transportation Price</h1>
+    <h1>Access Request</h1>
 
     <p id="description">
-      Մուտքագրիր քո 6 նիշանոց Device ID-ն։
+      Create 6-digit ID
     </p>
 
     <input
@@ -111,7 +111,7 @@
       placeholder="A7K29P"
     >
 
-    <button id="submitBtn">Request Access</button>
+    <button id="submitBtn">Request</button>
 
     <div id="message" class="message"></div>
 
@@ -179,7 +179,7 @@
       redirecting = true;
       stopStatusPolling();
 
-      setMessage("Մուտքը թույլատրված է ✅", "approved");
+      setMessage("Access granted ✅", "approved");
 
       redirectTimer = setTimeout(() => {
         window.location.href = "./transportationPrice.html";
@@ -194,7 +194,7 @@
       redirecting = true;
       stopStatusPolling();
 
-      setMessage("Մուտքը մերժված է ❌", "rejected");
+      setMessage("Access denied ❌", "rejected");
 
       redirectTimer = setTimeout(() => {
         window.location.href = "./entry.html";
@@ -207,7 +207,7 @@
 
       } else if (status === "pending") {
         setMessage(
-          "Ձեր access-ի հարցումը սպասման մեջ է։ Սպասիր admin-ի հաստատմանը։",
+          "Your access request is pending. Please wait for admin approval.",
           "waiting"
         );
 
@@ -216,7 +216,7 @@
 
       } else {
         setMessage(
-          "Device ID-ն դեռ գրանցված չէ։",
+          "Device ID is not registered yet.",
           "waiting"
         );
       }
@@ -280,7 +280,7 @@
 
       } catch (error) {
         setMessage(
-          "Ստուգման ժամանակ սխալ առաջացավ։",
+          "An error occurred during verification.",
           "rejected"
         );
 
@@ -293,7 +293,7 @@
 
       if (!validDeviceId(deviceId)) {
         setMessage(
-          "Մուտքագրիր ճիշտ 6 նիշանոց ID՝ միայն A-Z և 0-9։",
+          "Enter a valid 6-digit ID using only A-Z and 0-9.",
           "rejected"
         );
         return;
@@ -312,7 +312,7 @@
       submitBtn.disabled = true;
       deviceInput.disabled = true;
 
-      setMessage("Ուղարկվում է հարցումը…");
+      setMessage("Sending request");
 
       try {
         const data = await callFunction({
@@ -333,7 +333,7 @@
         submitBtn.disabled = false;
 
         setMessage(
-          "Սխալ առաջացավ։ Փորձիր կրկին։",
+          "An error occurred. Please try again.",
           "rejected"
         );
 
