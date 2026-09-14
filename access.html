@@ -332,9 +332,9 @@
       deviceInput.disabled = true;
       submitBtn.textContent = "Request";
 
-      setMessage("Sending request", "waiting");
+      setMessage("Sending request..", "waiting");
 
-await new Promise(resolve => setTimeout(resolve, 1500));
+await new Promise(resolve => setTimeout(resolve, 1200));
 
       try {
         const checkData = await callFunction({
