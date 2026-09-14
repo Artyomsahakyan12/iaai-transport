@@ -120,6 +120,14 @@
                 transform 0.15s ease;
         }
 
+        .transport-button {
+            font-family: inherit;
+            font-size: inherit;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
         .transport-button:hover,
         .bidcars-button:hover,
         .caucasusContainerTracking-button:hover {
@@ -245,14 +253,15 @@
             pointer-events: auto;
         }
 
+        /* Small iOS-style alert view */
         .access-modal-content {
             position: relative;
 
-            width: min(100%, 520px);
-            height: min(88vh, 760px);
+            width: min(92%, 390px);
+            height: min(540px, 82vh);
 
-            background: #f5f6fa;
-            border-radius: 28px;
+            background: #ffffff;
+            border-radius: 26px;
 
             overflow: hidden;
 
@@ -260,7 +269,7 @@
                 0 20px 70px rgba(0, 0, 0, 0.28),
                 0 0 0 1px rgba(255, 255, 255, 0.65);
 
-            transform: translateY(35px) scale(0.94);
+            transform: translateY(25px) scale(0.94);
             opacity: 0;
 
             transition:
@@ -389,7 +398,8 @@
             }
 
             .access-modal-content {
-                height: min(92vh, 760px);
+                width: min(92%, 380px);
+                height: min(540px, 82vh);
                 border-radius: 24px;
             }
         }
@@ -413,10 +423,9 @@
 
     <div class="buttons">
         <!-- Transportation Price -->
-        <a
+        <button
             class="transport-button"
-            href="./access.html"
-            target="_self"
+            type="button"
             id="transportButton"
         >
             <img
@@ -433,7 +442,7 @@
             </div>
 
             <div class="transport-arrow">›</div>
-        </a>
+        </button>
 
         <!-- BidCars -->
         <a
@@ -524,7 +533,7 @@
 
             // Load access.html inside the popup.
             if (accessFrame.getAttribute("src") === "about:blank") {
-                accessFrame.src = "./access.html";
+                accessFrame.src = "./access.html?popup=1";
             }
 
             accessModal.classList.add("active");
