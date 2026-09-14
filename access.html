@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hy">
 <head>
@@ -193,20 +192,33 @@
     }
 
     function showBlocked() {
-  stopStatusPolling();
+      stopStatusPolling();
 
-  redirecting = false;
-  currentDeviceId = null;
+      redirecting = false;
+      currentDeviceId = null;
 
-  deviceInput.value = "";
-  deviceInput.placeholder = "PULSE1";
-  deviceInput.disabled = false;
+      deviceInput.value = "";
+      deviceInput.placeholder = "PULSE1";
+      deviceInput.disabled = false;
 
-  submitBtn.disabled = false;
-  submitBtn.textContent = "New Request";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "New Request";
 
-  setMessage("Your ID blocked", "rejected");
-}
+      setMessage("Your ID blocked", "rejected");
+    }
+
+    function showExistingId() {
+      stopStatusPolling();
+
+      redirecting = false;
+      currentDeviceId = null;
+
+      deviceInput.disabled = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = "New Request";
+
+      setMessage("This ID already exists", "rejected");
+    }
 
     function showStatus(status) {
       if (status === "approved") {
@@ -314,7 +326,7 @@
       }
 
       redirecting = false;
-      currentDeviceId = deviceId;
+      currentDeviceId = null;
 
       submitBtn.disabled = true;
       deviceInput.disabled = true;
@@ -323,6 +335,16 @@
       setMessage("Sending request");
 
       try {
+        const checkData = await callFunction({
+          action: "check",
+          device_id: deviceId
+        });
+
+        if (checkData.exists === true) {
+          showExistingId();
+          return;
+        }
+
         const data = await callFunction({
           device_id: deviceId
         });
