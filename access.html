@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Request</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f6f8;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 390px;
+      background: white;
+      padding: 30px 24px;
+      border-radius: 20px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      font-size: 25px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin-top: 18px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .waiting {
+      color: #b7791f;
+    }
+
+    .rejected {
+      color: #d93025;
+    }
+
+    .approved {
+      color: #188038;
+    }
+
+    .change {
+      background: #e9ecef;
+      color: #111;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Transportation Price</h1>
+
+    <p id="description">
+      Մուտքագրիր քո 6 նիշանոց Device ID-ն։
+    </p>
+
+    <input
+      id="deviceId"
+      type="text"
+      maxlength="6"
+      autocomplete="off"
+      placeholder="A7K29P"
+    >
+
+    <button id="submitBtn">Request Access</button>
+
+    <div id="message" class="message"></div>
+
+    <button id="changeBtn" class="change" style="display:none;">
+      Change Device ID
+    </button>
+  </div>
+
+  <script>
+    const FUNCTION_URL =
+      "https://yusznijfwkdcvrrqqapz.supabase.co/functions/v1/telegram-access";
+
+    const STORAGE_KEY = "pulseAutoImportDeviceId";
+
+    const deviceInput = document.getElementById("deviceId");
+    const submitBtn = document.getElementById("submitBtn");
+    const changeBtn = document.getElementById("changeBtn");
+    const message = document.getElementById("message");
+    const description = document.getElementById("description");
+
+    function setMessage(text, className = "") {
+      message.textContent = text;
+      message.className = "message " + className;
+    }
+
+    function validDeviceId(id) {
+      return /^[A-Z0-9]{6}$/.test(id);
+    }
+
+    async function callFunction(body) {
+      const response = await fetch(FUNCTION_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Request failed");
+      }
+
+      return data;
+    }
+
+    function showApproved() {
+      setMessage("Մուտքը թույլատրված է ✅", "approved");
+
+      setTimeout(() => {
+        window.location.href = "./transportationPrice.html";
+      }, 700);
+    }
+
+    function showStatus(status) {
+      if (status === "approved") {
+        showApproved();
+      } else if (status === "pending") {
+        setMessage(
+          "Ձեր access-ի հարցումը սպասման մեջ է։ Սպասիր admin-ի հաստատմանը։",
+          "waiting"
+        );
+      } else if (status === "rejected") {
+        setMessage("You’re rejected ❌", "rejected");
+      } else {
+        setMessage("Device ID-ն դեռ գրանցված չէ։", "waiting");
+      }
+    }
+
+    async function checkSavedDevice() {
+      const savedId = localStorage.getItem(STORAGE_KEY);
+
+      if (!savedId) {
+        return;
+      }
+
+      deviceInput.value = savedId;
+      deviceInput.disabled = true;
+      submitBtn.disabled = true;
+      changeBtn.style.display = "block";
+
+      try {
+        const data = await callFunction({
+          action: "check",
+          device_id: savedId
+        });
+
+        showStatus(data.status);
+      } catch (error) {
+        setMessage("Ստուգման ժամանակ սխալ առաջացավ։", "rejected");
+        console.error(error);
+      }
+    }
+
+    submitBtn.addEventListener("click", async () => {
+      const deviceId = deviceInput.value.trim().toUpperCase();
+
+      if (!validDeviceId(deviceId)) {
+        setMessage(
+          "Մուտքագրիր ճիշտ 6 նիշանոց ID՝ միայն A-Z և 0-9։",
+          "rejected"
+        );
+        return;
+      }
+
+      submitBtn.disabled = true;
+      deviceInput.disabled = true;
+      setMessage("Ուղարկվում է հարցումը…");
+
+      try {
+        const data = await callFunction({
+          device_id: deviceId
+        });
+
+        localStorage.setItem(STORAGE_KEY, deviceId);
+        changeBtn.style.display = "block";
+
+        showStatus(data.status);
+      } catch (error) {
+        deviceInput.disabled = false;
+        submitBtn.disabled = false;
+
+        setMessage(
+          "Սխալ առաջացավ։ Փորձիր կրկին։",
+          "rejected"
+        );
+
+        console.error(error);
+      }
+    });
+
+    changeBtn.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+
+      deviceInput.value = "";
+      deviceInput.disabled = false;
+      submitBtn.disabled = false;
+      changeBtn.style.display = "none";
+      setMessage("");
+    });
+
+    checkSavedDevice();
+  </script>
+</body>
+</html>
