@@ -104,7 +104,7 @@
       type="text"
       maxlength="6"
       autocomplete="off"
-      placeholder="A7K29P"
+      placeholder="PULSE1"
     >
 
     <button id="submitBtn">Request</button>
@@ -193,17 +193,20 @@
     }
 
     function showBlocked() {
-      stopStatusPolling();
+  stopStatusPolling();
 
-      redirecting = false;
-      currentDeviceId = null;
+  redirecting = false;
+  currentDeviceId = null;
 
-      deviceInput.disabled = false;
-      submitBtn.disabled = false;
-      submitBtn.textContent = "New Request";
+  deviceInput.value = "";
+  deviceInput.placeholder = "PULSE1";
+  deviceInput.disabled = false;
 
-      setMessage("Your ID is blocked", "rejected");
-    }
+  submitBtn.disabled = false;
+  submitBtn.textContent = "New Request";
+
+  setMessage("Your ID blocked", "rejected");
+}
 
     function showStatus(status) {
       if (status === "approved") {
