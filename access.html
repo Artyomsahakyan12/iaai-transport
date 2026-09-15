@@ -173,7 +173,7 @@
 
       redirectTimer = setTimeout(() => {
         window.location.href = "./transportationPrice.html";
-      }, 700);
+      }, 500);
     }
 
     function showRejected() {
@@ -188,7 +188,7 @@
 
       redirectTimer = setTimeout(() => {
         window.location.href = "./entry.html";
-      }, 1500);
+      }, 1000);
     }
 
     function showBlocked() {
@@ -333,8 +333,6 @@
       submitBtn.textContent = "Request";
 
       setMessage("Sending request..", "waiting");
-
-await new Promise(resolve => setTimeout(resolve, 1200));
 
       try {
         const checkData = await callFunction({
